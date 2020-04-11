@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Mapa Coronga</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+
+<body>
+  <app-root></app-root>
+
+  <a id="dark-theme-button" onclick="changeTheme()" title="Dark Theme On/Off">
+    <img src="assets/images/light-bulb.png" width="35">
+  </a>
+
+  <script>
+    // Changes the page theme from normal to dark and vice versa.
+    function changeTheme() {
+      let html = document.getElementsByTagName('html')[0];
+
+      if (html.className.indexOf('dark-theme') < 0) {
+        html.classList.add('dark-theme');
+      }
+      else {
+        html.classList.remove('dark-theme');
+      }
+    }
+  </script>
+</body>
+
+</html>

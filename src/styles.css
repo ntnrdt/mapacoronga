@@ -1,0 +1,197 @@
+.legend .legend-item {
+    border: solid 1px #7baec5;
+}
+
+.card svg.material-icons path {
+    fill: #888;
+}
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 16px;
+}
+
+.card {
+    border-radius: 4px;
+    border: 1px solid #e0e0e0;
+    background-color: transparent;
+    height: 40px;
+    width: 150px;
+    margin: 0 8px 16px;
+    padding: 16px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s ease-in-out;
+    line-height: 24px;
+}
+
+.card-container .card:not(:last-child) {
+    margin-right: 0;
+}
+
+.card.card-small {
+    height: 16px;
+    width: 168px;
+}
+
+.card-container .card:not(.highlight-card) {
+    cursor: pointer;
+}
+
+.card-container .card:not(.highlight-card):hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 17px rgba(black, 0.35);
+}
+
+.card-container .card:not(.highlight-card):hover .material-icons path {
+    fill: rgb(105, 103, 103);
+}
+
+.card.highlight-card {
+    background-color: #1976d2;
+    color: white;
+    font-weight: 600;
+    border: none;
+    width: auto;
+    min-width: 30%;
+    position: relative;
+}
+
+.card.card.highlight-card span {
+    margin-left: 60px;
+}
+
+.leaflet-right .info h2,
+.leaflet-right .info h3 {
+    margin: 0px;
+}
+
+.leaflet-right .info h3 {
+    font-size: 16px;
+}
+
+.leaflet-right .info p {
+    font-size: 14px;
+    margin-top: 0px;
+}
+
+.leaflet-right .leaflet-control{
+    margin-right: 30px !important;
+}
+
+.leaflet-top.leaflet-right .info.leaflet-control {
+    text-align: right;
+    margin-top: 30px;
+}
+
+#dark-theme-button {
+    display: block;
+    position: fixed;
+    bottom: 20px;
+    left: 15px;
+    z-index: 9999;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    background-color: #292929;
+    color: white;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 50%;
+    box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
+    width: 24px;
+    height: 24px;
+  }
+  
+  #dark-theme-button img {
+    margin-left: -5px;
+    margin-top: -5px;
+    filter: invert(1);
+  }
+  
+  #dark-theme-button:hover {
+    background-color: #6b6b6b;
+  }
+
+  html.dark-theme,
+  html.dark-theme .toolbar {
+    background-color: #292929
+  }
+
+  html.dark-theme #map .leaflet-overlay-pane svg {
+    background-color: #2a2a2abf
+  }
+
+  html.dark-theme, 
+  html.dark-theme .toolbar,
+  html.dark-theme .last-updated,
+  html.dark-theme .card span,
+  html.dark-theme #map {
+      color: white !important;
+  }
+
+  html.dark-theme #dark-theme-button {
+    background-color: white;
+  }
+
+  html.dark-theme #dark-theme-button img {
+      filter: none;
+  }
+
+  html.dark-theme #dark-theme-button:hover {
+    background-color: #6b6b6b;
+    filter: invert(1);
+  }
+
+  html.dark-theme .card .deadly {
+    color: white !important;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 767px) {
+    .card-container > *:not(.circle-link) {
+        width: 100%;
+    }
+
+    .card:not(.highlight-card) {
+        height: 16px;
+        margin: 8px 0;
+    }
+
+    .card.highlight-card span {
+        margin-left: 72px;
+    }
+}
+
+@media (max-width: 767px){
+    #map {
+        width: 100% !important;
+    }
+
+    .last-updated {
+        position: static !important;
+    }
+
+    .leaflet-right div.leaflet-control {
+        margin-right: 10px !important;
+    }
+
+    .leaflet-right .info h2,
+    .leaflet-right .info h3 {
+        font-size: 14px !important;
+    }
+
+    .leaflet-right .info p {
+        font-size: 12px !important;
+        margin-top: -5px !important;
+        margin-bottom: 5px !important;
+    }
+
+    .leaflet-right .info {
+        font-size: 8px;
+    }
+}
