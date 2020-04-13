@@ -2,7 +2,7 @@
 #map {
     border: solid 1px #e0e0e0;
     border-radius: 10px;
-    height: 600px;
+    height: 550px;
     position: relative;
     width: 80vw;
 }
@@ -60,10 +60,12 @@
     font-weight: 900;
     margin-bottom: 0px;
     margin-top: 0px;
+    /* padding-right: 16px; */
 }
 
 .card-container .card span { 
     font-weight: 900;
+    /* padding-right: 16px; */
 }
 
 .card .confirmed {
@@ -97,7 +99,16 @@
     margin-top: 5px;
 }
 
+.g-ml-0 {
+    margin-left: 0px !important;
+}
+
 .g-mr-0{
-    margin-right: 0px;
+    margin-right: 0px !important;
+}
+
+div#fonte p {
+    margin-top: 5px;
+    margin-bottom: 0px;
 }
 

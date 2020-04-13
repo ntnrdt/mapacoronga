@@ -1,11 +1,11 @@
 import { IFeatureModel } from './feature.model';
 
 export interface IMapModel {
-    type: string,
     features: IFeatureModel[],
+    lastUpdate: Date,
     totalCases: number,
+    totalDeadly: string,
     totalDeaths: number,
     totalRecovered: number,
-    totalDeadly: string,
-    lastUpdate: Date
+    type: string
 }

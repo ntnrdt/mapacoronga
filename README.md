@@ -1,27 +1,19 @@
-# Coronga
+# Mapa Coronavirus (COVID-19) no Brasil
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.20.
+Esse projeto tem o intuito de fornecer os dados atuais sobre os casos de COVID-19 no Brasil.
 
-## Development server
+Voce pode verificar os dados atuais atraves do link [Coronavírus no Brasil](https://cov19.com.br).
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Referencias
 
-## Code scaffolding
+Public Covid19 API: [api.covid19api.com](https://api.covid19api.com/)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Ministério da Saúde: [covid.saude.gov.br](https://covid.saude.gov.br/)
 
-## Build
+Mapa API: [mapbox](https://www.mapbox.com)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Mapa Plugin: [leaflet](https://leafletjs.com/examples/choropleth/)
 
-## Running unit tests
+Geometria dos Estados: [eduardo-veras](https://github.com/eduardo-veras/kml-brasil/tree/master/lib/2010/estados/geojson)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+**NOTA:**  *Este projeto é OpenSource*

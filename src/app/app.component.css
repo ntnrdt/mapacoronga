@@ -157,6 +157,12 @@ svg#clouds {
     width: 1920px;
 }
 
+.circle-link img {
+    margin-top: -1px;
+    margin-left: -1px;
+    width: 36px;
+}
+
 /* Responsive Styles */
 @media screen and (max-width: 767px) {
     svg#rocket-smoke {
@@ -172,6 +178,3 @@ svg#clouds {
     }
 }
 
-#virus-icon-top {
-    width: 80px;
-}

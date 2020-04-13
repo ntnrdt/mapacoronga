@@ -7,6 +7,9 @@ import { MapComponent } from './map/map.component';
 import { MapService } from './map/shared/map.service';
 import { HttpClientModule } from '@angular/common/http';
 import { CoordinatesService } from './map/shared/coordinates.service';
+import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
+import { ToastrModule} from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -16,11 +19,19 @@ import { CoordinatesService } from './map/shared/coordinates.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxSpinnerModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut: 10000,
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+    })
   ],
   providers: [
     MapService,
-    CoordinatesService
+    CoordinatesService,
+    NgxSpinnerService
   ],
   bootstrap: [AppComponent]
 })

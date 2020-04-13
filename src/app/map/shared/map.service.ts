@@ -8,7 +8,7 @@ export class MapService {
     constructor(
         private httpClient: HttpClient) { }
 
-    init(): Observable<IPortalMapModel> {
+    getCases(): Observable<IPortalMapModel> {
 
         return this.httpClient
             .get<IPortalMapModel>('{{SOURCE-DOMAIN}}}', {
@@ -18,10 +18,10 @@ export class MapService {
             });
     }
 
-    getTotalRecovered(): Observable<any[]> {
+    getCasesRecovered(): Observable<any[]> {
 
         return this.httpClient
-            .get<any[]>('{{SOURCE-DOMAIN}}', {
+            .get<any[]>('{{SOURCE-DOMAIN}}}', {
                 headers: new HttpHeaders({
                     'Access-Control-Allow-Origin': '*'
                 })

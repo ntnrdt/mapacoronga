@@ -79,7 +79,7 @@
     margin-top: 0px;
 }
 
-.leaflet-right .leaflet-control{
+.leaflet-right .leaflet-control {
     margin-right: 30px !important;
 }
 
@@ -91,6 +91,7 @@
 #dark-theme-button {
     display: block;
     position: fixed;
+    padding: 9px !important;
     bottom: 20px;
     left: 15px;
     z-index: 9999;
@@ -105,61 +106,70 @@
     box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
     width: 24px;
     height: 24px;
-  }
-  
-  #dark-theme-button img {
-    margin-left: -5px;
-    margin-top: -5px;
+}
+
+#dark-theme-button img {
+    margin-left: -3px;
+    margin-top: -3px;
+    width: 29px;
     filter: invert(1);
-  }
-  
-  #dark-theme-button:hover {
+}
+
+#dark-theme-button:hover {
     background-color: #6b6b6b;
-  }
+}
 
-  html.dark-theme,
-  html.dark-theme .toolbar {
-    background-color: #292929
-  }
+html.dark-theme,
+html.dark-theme .toolbar {
+    background-color: #292929;
+}
 
-  html.dark-theme #map .leaflet-overlay-pane svg {
-    background-color: #2a2a2abf
-  }
+html.dark-theme #map .leaflet-overlay-pane svg {
+    background-color: #2a2a2abf;
+}
 
-  html.dark-theme, 
-  html.dark-theme .toolbar,
-  html.dark-theme .last-updated,
-  html.dark-theme .card span,
-  html.dark-theme #map {
-      color: white !important;
-  }
+html.dark-theme,
+html.dark-theme .toolbar,
+html.dark-theme .last-updated,
+html.dark-theme .card span,
+html.dark-theme #map,
+html.dark-theme #fonte,
+html.dark-theme #fonte a {
+    color: white !important;
+}
 
-  html.dark-theme #dark-theme-button {
+html.dark-theme #dark-theme-button {
     background-color: white;
-  }
+}
 
-  html.dark-theme #dark-theme-button img {
-      filter: none;
-  }
+html.dark-theme #dark-theme-button img {
+    filter: none;
+}
 
-  html.dark-theme #dark-theme-button:hover {
+html.dark-theme #dark-theme-button:hover {
     background-color: #6b6b6b;
     filter: invert(1);
-  }
+}
 
-  html.dark-theme .card .deadly {
+html.dark-theme .card .deadly {
     color: white !important;
 }
 
 /* Responsive Styles */
 @media screen and (max-width: 767px) {
-    .card-container > *:not(.circle-link) {
+    /* .card-container > *:not(.circle-link) {
         width: 100%;
+    } */
+
+    .cards.card-container {
+        justify-content: space-between !important;
+        margin-bottom: 15px;
     }
 
     .card:not(.highlight-card) {
         height: 16px;
         margin: 8px 0;
+        width: 40%;
     }
 
     .card.highlight-card span {
@@ -167,7 +177,64 @@
     }
 }
 
-@media (max-width: 767px){
+/* up to iPhone5/5s/SE portrait mode */
+@media (max-width: 767px) and (orientation: portrait) {
+    .cards.card-container .card h2 {
+        font-size: 1.6em !important;
+    }
+
+    .cards.card-container .card span {
+        font-weight: 700 !important;
+    }
+}
+
+/* up to iPhone 8 plus landscape mode */
+@media (max-width: 736px) and (orientation: landscape) {
+    .cards.card-container {
+        justify-content: space-evenly !important;
+        margin-bottom: 15px;
+    }
+
+    .cards.card-container .card {
+        width: 15vw !important;
+        margin-right: 10px;
+    }
+
+    .cards.cards.card-container .card h2 {
+        font-size: 1.5em !important;
+    }
+
+    .cards.cards.card-container .card span {
+        font-size: 1em;
+        font-weight: 500 !important;
+    }
+}
+
+/* iPhone 6 and up - cards h2 */
+@media (min-width: 414px) and (orientation: portrait) {
+    .cards.card-container .card h2 {
+        font-size: 1.8em !important;
+    }
+}
+
+/* up to iPhone5/5s/SE */
+@media (max-width: 414px) and (orientation: portrait) {
+    .cards.card-container {
+        justify-content: space-evenly !important;
+        margin-bottom: 15px;
+    }
+
+    .cards.card-container .card {
+        width: 35% !important;
+    }
+
+    .cards.card-container .card span {
+        font-weight: 700 !important;
+    }
+}
+
+/* all devices */
+@media (max-width: 768px) {
     #map {
         width: 100% !important;
     }
@@ -194,4 +261,66 @@
     .leaflet-right .info {
         font-size: 8px;
     }
+}
+
+/* all devices */
+@media (min-width: 767px) and (max-width: 1200px) {
+    .last-updated {
+        width: 100%;
+        display: contents;
+    }
+}
+
+/* all devices */
+@media (min-width: 767px) and (max-width: 1024px) {
+    .card-container .card {
+        width: 15vw !important;
+    }
+}
+
+/* iPad portrait */
+@media (device-width: 768px) and (orientation: portrait) {
+    .card-container .card {
+        width: 135px;
+    }
+}
+
+/* iPad and iPhone X landscape */
+@media (device-width: 812px) and (orientation: landscape), (device-width: 1024px) and (orientation: landscape) {
+    .last-updated {
+        width: 100%;
+        display: contents;
+    }
+}
+
+/* iPad landscape */
+@media (device-width: 1024px) and (orientation: landscape) {
+    .card-container .card {
+        width: 165px !important;
+    }
+}
+
+/* iPhone X landscape */
+@media (device-width: 812px) and (orientation: landscape) {
+    .card-container .card {
+        width: 15vw;
+    }
+}
+
+/* iPad Pro portrait */
+@media (device-width: 1024px) and (orientation: portrait) {
+    .card-container .card {
+        width: 165px !important;
+    }
+
+    .last-updated {
+        width: 100%;
+        display: contents;
+    }
+}
+
+/* Toastr */
+.toast-container {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
+        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }

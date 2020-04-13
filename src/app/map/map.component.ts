@@ -3,6 +3,8 @@ import { MapService } from './shared/map.service';
 import { IStateModel } from '../models/state.model';
 import { IMapModel } from '../models/map.model';
 import { CoordinatesService } from './shared/coordinates.service';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
 
 declare let L: any;
 
@@ -13,71 +15,87 @@ declare let L: any;
 })
 export class MapComponent implements OnInit {
   mapModel: IMapModel = {
-    type: 'FeatureCollection',
     features: [],
+    lastUpdate: new Date('01/01/1900'),
     totalCases: 0,
+    totalDeadly: '0%',
     totalDeaths: 0,
     totalRecovered: 0,
-    totalDeadly: '0%',
-    lastUpdate: new Date('01/01/1900')
+    type: 'FeatureCollection'
   };
 
   constructor(
     private mapService: MapService,
-    private coordinatesService: CoordinatesService) { }
+    private coordinatesService: CoordinatesService,
+    private spinner: NgxSpinnerService,
+    private toastr: ToastrService) { }
 
   ngOnInit() {
     this.initializeMap();
   }
 
+  // initialize map
   initializeMap() {
 
-    // get the model
-    this.mapService.init()
-      .subscribe(data => {
+    this.spinner.show();
 
-        if (!data || !data.results) return;
+    // get the model
+    this.mapService.getCases()
+      .subscribe(cases => {
+
+        if (!cases || !cases.results) return;
 
         // the result is ordered from oldest to newest, with that, get the lastest report (newest)
-        this.mapService.getTotalRecovered()
-          .subscribe(recovers => {
-
-            if (recovers)
-              this.mapModel.totalRecovered = recovers[recovers.length - 1].Cases;
-
-            let count = 0;
-
-            data.results.forEach(item => {
-              let updatedAt = new Date(item.updatedAt);
-
-              this.mapModel.features.push({
-                type: 'Feature',
-                id: count + 1,
-                properties: {
-                  name: item.nome,
-                  cases: item.qtd_confirmado,
-                  updatedAt: updatedAt,
-                  deadly: item.letalidade,
-                  deaths: item.qtd_obito
-                },
-                geometry: this.coordinatesService.getGeometryByStateName(item.nome)
-              });
-
-              this.mapModel.totalCases += item.qtd_confirmado;
-              this.mapModel.totalDeaths += item.qtd_obito;
-              this.mapModel.lastUpdate = updatedAt <= this.mapModel.lastUpdate ?
-                this.mapModel.lastUpdate :
-                updatedAt;
-              count++;
-            });
-
-            this.mapModel.totalDeadly =
-              ((this.mapModel.totalDeaths / this.mapModel.totalCases) * 100).toFixed(2).replace('.', ',')
-
-            this.buildMap();
-
+        this.mapService.getCasesRecovered()
+          .subscribe(casesRecovered => {
+            this.loadDataToMap(cases, casesRecovered);
+          }, error => {
+            this.toastr.warning(`A fonte de dados sobre "Casos Recuperados" está indisponível, 
+            tente novamente mais tarde.`, 'ATENÇÃO');
+            this.loadDataToMap(cases, undefined);
           });
+      }, error=>{
+        this.toastr.error(`A fonte de dados sobre os casos de COVID-19 no Brasil está indisponível, 
+        tente novamente mais tarde.`, 'OOPS');
       });
+  }
+
+  // giving the cases with or without recovered cases, build load to map
+  loadDataToMap(cases: any, casesRecovered: any) {
+    if (casesRecovered)
+      this.mapModel.totalRecovered = casesRecovered[casesRecovered.length - 1].Cases;
+
+    let count = 0;
+
+    cases.results.forEach(item => {
+      let updatedAt = new Date(item.updatedAt);
+
+      this.mapModel.features.push({
+        type: 'Feature',
+        id: count + 1,
+        properties: {
+          name: item.nome,
+          cases: item.qtd_confirmado,
+          updatedAt: updatedAt,
+          deadly: item.letalidade,
+          deaths: item.qtd_obito
+        },
+        geometry: this.coordinatesService.getGeometryByStateName(item.nome)
+      });
+
+      this.mapModel.totalCases += item.qtd_confirmado;
+      this.mapModel.totalDeaths += item.qtd_obito;
+      this.mapModel.lastUpdate = updatedAt <= this.mapModel.lastUpdate ?
+        this.mapModel.lastUpdate :
+        updatedAt;
+      count++;
+    });
+
+    this.mapModel.totalDeadly =
+      ((this.mapModel.totalDeaths / this.mapModel.totalCases) * 100).toFixed(2).replace('.', ',')
+
+    this.buildMap();
+    this.spinner.hide();
   }
 
   // build map and includes the info and legend
@@ -86,7 +104,7 @@ export class MapComponent implements OnInit {
     // initialization of the Choropleth map
     map = L.map('map').setView([-14.2350, -51.9253], 4);
 
-    // set the map tile layer
+    // set the map tile layer, PLEASE REPLACE WITH YOUR API TOKEN
     L.tileLayer('https://api.mapbox.com/styles/v1/ntnrdt/ck8sqxwbu1ms51im9s4jewmo8/tiles/{z}/{x}/{y}?fresh=true&access_token=pk.eyJ1IjoibnRucmR0IiwiYSI6ImNrOHNxdHBtaTBicGUzbXBhOGZna3NubGoifQ.rTKtElqa9KMFJtvCVfaqng', {
       attribution: `Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>`,
       id: 'mapbox/light-v9',
@@ -141,9 +159,9 @@ export class MapComponent implements OnInit {
     info.summary = {
       country: 'Brasil',
       totalCases: this.mapModel.totalCases,
-      totalRecovered: this.mapModel.totalRecovered,
+      totalDeadly: this.mapModel.totalDeadly,
       totalDeaths: this.mapModel.totalDeaths,
-      totalDeadly: this.mapModel.totalDeadly
+      totalRecovered: this.mapModel.totalRecovered,
     };
 
     // callback to be executed after info is attached to the map
@@ -155,6 +173,7 @@ export class MapComponent implements OnInit {
 
     // method that we will use to update the control based on feature properties passed
     info.update = function (props: IStateModel) {
+
       this._div.innerHTML = `
       ${(props ?
           `<h2>${props.name}</h2><br />
@@ -183,14 +202,20 @@ export class MapComponent implements OnInit {
     legend.onAdd = function (map) {
 
       var div = L.DomUtil.create('div', 'info legend');
-      var grades = [0, 100, 250, 500, 1000, 2000, 3000, 5000, 7000, 8000];
 
       // loop through our density intervals and generate a label with a colored square for each interval
-      for (var i = 0; i < grades.length; i++) {
-        div.innerHTML +=
-          `<span class="legend-item" style="background: ${getColor(grades[i] + 1)}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-          ${grades[i]} ${(i < grades.length - 1 ? `&ndash;${grades[i + 1]}<br>` : '+')}
-          `;
+      for (var i = 0; i < colors.length; i++) {
+        let colorBox = `<span class="legend-item" style="background: ${colors[i].color}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>`;
+        let indicator = `${colors[i].indicator}`;
+
+        if (i == 0)
+          indicator += '<br />';
+        else if (i < colors.length - 1)
+          indicator += `&ndash;${colors[i + 1].indicator}<br>`;
+        else
+          indicator += '+';
+
+        div.innerHTML += `${colorBox}&nbsp;${indicator}`;
       }
 
       return div;
@@ -224,39 +249,63 @@ export function transformNumber(number: string) {
 // for each feature (state) enables the mouse over/out/click
 export function onEachFeature(feature, layer) {
   layer.on({
-    mouseover: (event: { target: any; }) => {
-      event.target.setStyle({
-        weight: 2,
-        color: '#666',
-        dashArray: '',
-        fillOpacity: 1
-      });
-
-      if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge)
-        event.target.bringToFront();
-
-      info.update(event.target.feature.properties)
-    },
-    mouseout: (event: { target: any; }) => {
-      geojson.resetStyle(event.target);
-      info.update();
-    },
+    mouseover: stateSelect,
+    mouseout: stateDeselect,
     click: (event: { target: { getBounds: () => any; }; }) => {
+
+      // if any, remove previous selection
+      if (map.stateSelected) {
+        stateDeselect(map.stateSelected);
+        map.stateSelected = undefined;
+      }
+
+      // select state
+      stateSelect(event);
       map.fitBounds(event.target.getBounds());
+      map.stateSelected = event;
     }
   });
 }
 
+// select a state through mouseover or click
+export function stateSelect(event: any) {
+  event.target.setStyle({
+    weight: 2,
+    color: '#666',
+    dashArray: '',
+    fillOpacity: 1
+  });
+
+  if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge)
+    event.target.bringToFront();
+
+  info.update(event.target.feature.properties)
+}
+
+// deselect state
+export function stateDeselect(event: any) {
+  geojson.resetStyle(event.target);
+  info.update();
+}
+
 // get color based on the amount of cases
 export function getColor(d) {
-  return d > 7999 ? '#2d0006' :
-    d > 6999 ? '#67000e' :
-      d > 4999 ? '#a40f15' :
-        d > 2999 ? '#cb191c' :
-          d > 1999 ? '#ef3c2c' :
-            d > 999 ? '#fb6a4a' :
-              d > 499 ? '#fc9272' :
-                d > 249 ? '#fcbba1' :
-                  d > 0 ? '#fee0d2' :
-                    '#ffffff';
+  for (let i = colors.length - 1; i > 0; i--) {
+    if (d >= colors[i].indicator)
+      return colors[i].color;
+  }
 }
+
+export var colors = [
+  { indicator: 0, color: '#ffffff' },
+  { indicator: 1, color: '#f9e9e2' },
+  { indicator: 100, color: '#fee0d2' },
+  { indicator: 250, color: '#fcbba1' },
+  { indicator: 500, color: '#fc9272' },
+  { indicator: 1000, color: '#fb6a4a' },
+  { indicator: 2000, color: '#ef3c2c' },
+  { indicator: 3000, color: '#cb191c' },
+  { indicator: 5000, color: '#a40f15' },
+  { indicator: 7000, color: '#67000e' },
+  { indicator: 8000, color: '#2d0006' }
+]
