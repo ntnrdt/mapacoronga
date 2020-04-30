@@ -9,7 +9,7 @@
 
   <meta property="og:title" content="Coronavírus Brasil" />
   <meta property="og:type" content="website" />
-  <meta property="og:description" content="Mapa do Brasil com a quantidade de casos de Coronavírus." />
+  <meta property="og:description" content="Monitor de Casos de Coronavírus no Brasil." />
   <meta property="og:url" content="https://www.cov19.com.br/" />
   <meta property="og:image"
     content="https://www.cov19.com.br/assets/images/icons/android-chrome-512x512.png?20190816" />
@@ -33,13 +33,16 @@
 
 <body>
   <app-root></app-root>
-
-  <a id="dark-theme-button" onclick="changeTheme()" title="Dark Theme On/Off">
-    <img src="assets/images/light-bulb.png" width="35">
-  </a>
-
-  <script>
   
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-147719769-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-147719769-2');
+
     // Changes the page theme from normal to dark and vice versa.
     function changeTheme() {
       let html = document.getElementsByTagName('html')[0];

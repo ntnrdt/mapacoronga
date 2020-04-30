@@ -1,40 +1,39 @@
-<!-- Toolbar -->
-<div class="toolbar" role="banner">
-  <img width="40" alt="Logo" src="../assets/images/br.svg" />
-  <span><b>MAPA COVID19</b></span>
-  <img width="40" alt="Logo" src="../assets/images/rio.svg" />
-  <div class="spacer"></div>
-</div>
+<app-header></app-header>
 
-<div class="content" role="main">
-  <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="default" color="#fff" type="ball-atom" [fullScreen]="true">
-    <p style="color: white"> Carregando... </p>
-  </ngx-spinner>
-  <app-map></app-map>
+<app-carousel></app-carousel>
 
-  <!-- Links -->
-  <div class="card-container">
-    <a class="circle-link" title="Covid Saude Gov Br" href="https://covid.saude.gov.br/" target="_blank" rel="noopener">
-      <img src="../assets/images/covid.saude.gov.br.png" alt="Gov Brasil" width="35">
-    </a>
-    <a class="circle-link" title="Covid19api" href="https://api.covid19api.com/" target="_blank" rel="noopener">
-      <img src="../assets/images/public.svg" alt="Covid19api"
-        style="width: 45px !important;margin-top: 0px;margin-left: 0;">
-    </a>
-    <a class="circle-link" title="Repositorio" href="https://github.com/ntnrdt/mapacoronga" target="_blank"
-      rel="noopener">
-      <img src="../assets/images/github.png" alt="Repositorio" width="35">
-    </a>
-    <a class="circle-link" title="Email" href="mailto:natanrdutra@gmail.com?Subject=Mapa%20Covid19" target="_blank"
-      rel="noopener">
-      <img src="../assets/images/gmail.png" alt="Email" width="35">
-    </a>
-    <a class="circle-link" title="Twitter" href="https://twitter.com/ntnrdt" target="_blank" rel="noopener">
-      <img src="../assets/images/twitter.png" alt="Twitter" width="35">
-    </a>
-    <a class="circle-link" title="LinkedIn" href="https://www.linkedin.com/in/n-dutra/" target="_blank" rel="noopener">
-      <img src="../assets/images/linkedin.png" alt="LinkedIn" width="35">
-    </a>
+<app-intro></app-intro>
+
+<app-summary></app-summary>
+
+<div class="container">
+  <div class="row g-ma-0-min-xs">
+    <div class="col-12 col-md-6 g-pa-0-max-sm g-pl-0-min-md">
+      <app-map></app-map>
+    </div>
+    <div class="col-12 col-md-6 g-pa-0-max-sm g-pr-0-min-md">
+      <app-states></app-states>
+    </div>
   </div>
 </div>
-<router-outlet></router-outlet>
+
+<div class="container">
+  <div class="col-12 g-pl-0 g-pa-0-min-xs">
+    <app-timeline></app-timeline>
+  </div>
+</div>
+
+<app-links></app-links>
+<app-footer></app-footer>
+
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="default" color="#fff" type="ball-atom" [fullScreen]="true">
+  <p style="color: white"> Carregando... </p>
+</ngx-spinner>
+
+<!-- <div id="triangle-top-left">
+  <div id="update-at"></div>
+</div> -->
+
+<a id="dark-theme-button" onclick="changeTheme()" title="Dark Theme On/Off">
+  <img src="assets/images/light-bulb.png" width="35">
+</a>

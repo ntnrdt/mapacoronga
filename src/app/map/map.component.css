@@ -1,10 +1,7 @@
 /* MAP CSS */
 #map {
-    border: solid 1px #e0e0e0;
-    border-radius: 10px;
     height: 550px;
     position: relative;
-    width: 80vw;
 }
 
 .info {
@@ -42,49 +39,6 @@
     border: solid 1px #7baec5;
 }
 
-.card {
-    height: 50px;
-    text-align: right;
-}
-
-.card-container{
-    justify-content: flex-end;
-}
-
-.card-container .card {
-    display: block;
-}
-
-.card-container .card h2{ 
-    font-size: 30px;
-    font-weight: 900;
-    margin-bottom: 0px;
-    margin-top: 0px;
-    /* padding-right: 16px; */
-}
-
-.card-container .card span { 
-    font-weight: 900;
-    /* padding-right: 16px; */
-}
-
-.card .confirmed {
-    color: #eedb37;
-}
-
-.card .recovered {
-    color: #00c85f;
-}
-
-.card .deaths {
-    color: red;
-}
-
-.card .deadly {
-    color: purple;
-}
-
-
 .last-updated{
     position: absolute;
     width: 200px;
@@ -99,16 +53,7 @@
     margin-top: 5px;
 }
 
-.g-ml-0 {
-    margin-left: 0px !important;
-}
-
-.g-mr-0{
-    margin-right: 0px !important;
-}
-
-div#fonte p {
+div.source p {
     margin-top: 5px;
     margin-bottom: 0px;
 }
-

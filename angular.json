@@ -22,16 +22,25 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/assets/plugins/leaflet/dist/images",
               "src/web.config"
             ],
             "styles": [
               "src/styles.css",
+              "src/assets/styles/customs.css",
+              "src/assets/styles/layout.css",
+              "src/assets/styles/sizing.css",
+              "src/assets/styles/spacing.css",
               "src/assets/plugins/leaflet/dist/leaflet.css",
-              "node_modules/ngx-toastr/toastr.css"
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/ngx-toastr/toastr.css",
+              "node_modules/chart.js/dist/Chart.min.css"
             ],
             "scripts": [
-              "src/assets/plugins/leaflet/dist/leaflet.js"
+              "src/assets/plugins/leaflet/dist/leaflet.js",
+              "src/assets/scripts/utils.js",
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "node_modules/chart.js/dist/Chart.min.js"
             ]
           },
           "configurations": {

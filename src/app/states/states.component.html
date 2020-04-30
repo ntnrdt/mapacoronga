@@ -1,0 +1,31 @@
+<section class="states-section">
+    <div class="card">
+        <h5 class="card-header">
+            Tabela dos Estados
+        </h5>
+        <div class="card-body g-pa-0">
+            <div class="table-responsive table-wrapper-scroll-y table-wrapper-scrollbar g-h-550">
+                <table class="table table-bordered sticky-header table-striped g-mb-0">
+                    <thead>
+                        <tr>
+                            <th scope="col">Estado</th>
+                            <th scope="col" title="Total de Habitantes">Habitantes</th>
+                            <th scope="col" title="Total de Casos Confirmados">Confirmados</th>
+                            <th scope="col" title="Total de Óbitos">Óbitos</th>
+                            <th scope="col" class="text-center" title="Casos por 100k Habitantes">100k (H)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of summaryItems">
+                            <td class="text-center">{{item.code}}</td>
+                            <td class="text-right">{{item.population.toLocaleString('pt-BR')}}</td>
+                            <td class="text-right">{{item.confirmed.toLocaleString('pt-BR')}}</td>
+                            <td class="text-right">{{item.deaths.toLocaleString('pt-BR')}}</td>
+                            <td class="text-center">{{item.qty}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>

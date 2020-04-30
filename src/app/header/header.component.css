@@ -1,0 +1,20 @@
+.toolbar {
+    height: 70px;
+    margin: -8px;
+    display: flex;
+    align-items: center;
+    background-color: white;
+    color: black;
+    font-weight: 600;
+    box-shadow: 4px 6px 12px 2px #88888854;
+}
+
+.toolbar img {
+    margin: 0 16px;
+}
+
+.toolbar span {
+    font-size: 1.7rem;
+    text-align: center;
+    width: 100%;
+}

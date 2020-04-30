@@ -1,73 +1,28 @@
+.simple-border {
+    border: solid 1px #e0e0e0;
+    border-radius: 10px;
+}
+
+table.sticky-header th {
+    background: white;
+    position: sticky;
+    top: -1px;
+    box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
+}
+
 .legend .legend-item {
     border: solid 1px #7baec5;
-}
-
-.card svg.material-icons path {
-    fill: #888;
-}
-
-.card-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 16px;
-}
-
-.card {
-    border-radius: 4px;
-    border: 1px solid #e0e0e0;
-    background-color: transparent;
-    height: 40px;
-    width: 150px;
-    margin: 0 8px 16px;
-    padding: 16px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    transition: all 0.2s ease-in-out;
-    line-height: 24px;
-}
-
-.card-container .card:not(:last-child) {
-    margin-right: 0;
-}
-
-.card.card-small {
-    height: 16px;
-    width: 168px;
-}
-
-.card-container .card:not(.highlight-card) {
-    cursor: pointer;
-}
-
-.card-container .card:not(.highlight-card):hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 17px rgba(black, 0.35);
-}
-
-.card-container .card:not(.highlight-card):hover .material-icons path {
-    fill: rgb(105, 103, 103);
-}
-
-.card.highlight-card {
-    background-color: #1976d2;
-    color: white;
-    font-weight: 600;
-    border: none;
-    width: auto;
-    min-width: 30%;
-    position: relative;
-}
-
-.card.card.highlight-card span {
-    margin-left: 60px;
 }
 
 .leaflet-right .info h2,
 .leaflet-right .info h3 {
     margin: 0px;
+}
+
+.leaflet-right .info h2 {
+    font-size: 16px;
+    margin-bottom: 10px;
+    text-decoration: underline;
 }
 
 .leaflet-right .info h3 {
@@ -77,15 +32,29 @@
 .leaflet-right .info p {
     font-size: 14px;
     margin-top: 0px;
+    margin-bottom: 5px;
 }
 
 .leaflet-right .leaflet-control {
-    margin-right: 30px !important;
+    margin-right: 10px !important;
 }
 
 .leaflet-top.leaflet-right .info.leaflet-control {
     text-align: right;
-    margin-top: 30px;
+    margin-top: 10px;
+}
+
+.info p:last-of-type {
+    margin-bottom: 0;
+}
+
+.info.leaflet-control {
+    background-color: #ffffffad;
+    padding-left: 20px;
+    border-radius: 10px;
+    padding-right: 14px;
+    padding-bottom: 5px;
+    padding-top: 5px;
 }
 
 #dark-theme-button {
@@ -98,18 +67,18 @@
     font-size: 18px;
     border: none;
     outline: none;
-    background-color: #292929;
+    background-color: rgb(13, 63, 99);
     color: white;
     cursor: pointer;
     padding: 15px;
     border-radius: 50%;
-    box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
-    width: 24px;
-    height: 24px;
+    box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.5), 0 6px 10px 0 rgba(0, 0, 0, 0.5), 0 1px 18px 0 rgba(0, 0, 0, 0.5);
+    width: 45px;
+    height: 45px;
 }
 
 #dark-theme-button img {
-    margin-left: -3px;
+    margin-left: -1px;
     margin-top: -3px;
     width: 29px;
     filter: invert(1);
@@ -120,21 +89,34 @@
 }
 
 html.dark-theme,
-html.dark-theme .toolbar {
-    background-color: #292929;
+html.dark-theme .toolbar,
+html.dark-theme footer,
+html.dark-theme .card .card-header,
+html.dark-theme body,
+html.dark-theme .table-striped thead tr th {
+    background-color: #292929 !important;
 }
 
-html.dark-theme #map .leaflet-overlay-pane svg {
+html.dark-theme #map .leaflet-overlay-pane svg,
+html.dark-theme #aggregated-chart,
+html.dark-theme .card .card-body {
     background-color: #2a2a2abf;
+}
+
+html.dark-theme #aggregated-chart {
+    filter: brightness(1.5);
 }
 
 html.dark-theme,
 html.dark-theme .toolbar,
-html.dark-theme .last-updated,
+html.dark-theme footer,
+html.dark-theme .heads-up,
 html.dark-theme .card span,
+html.dark-theme .card .card-header,
 html.dark-theme #map,
 html.dark-theme #fonte,
-html.dark-theme #fonte a {
+html.dark-theme #fonte a,
+html.dark-theme .table-striped thead tr {
     color: white !important;
 }
 
@@ -151,176 +133,17 @@ html.dark-theme #dark-theme-button:hover {
     filter: invert(1);
 }
 
-html.dark-theme .card .deadly {
+html.dark-theme .card,
+html.dark-theme .card .card-body h5.card-title {
     color: white !important;
 }
 
-/* Responsive Styles */
-@media screen and (max-width: 767px) {
-    /* .card-container > *:not(.circle-link) {
-        width: 100%;
-    } */
-
-    .cards.card-container {
-        justify-content: space-between !important;
-        margin-bottom: 15px;
-    }
-
-    .card:not(.highlight-card) {
-        height: 16px;
-        margin: 8px 0;
-        width: 40%;
-    }
-
-    .card.highlight-card span {
-        margin-left: 72px;
-    }
+html.dark-theme .table-striped tbody tr {
+    background-color: #292929 !important;
+    color: white;
 }
 
-/* up to iPhone5/5s/SE portrait mode */
-@media (max-width: 767px) and (orientation: portrait) {
-    .cards.card-container .card h2 {
-        font-size: 1.6em !important;
-    }
-
-    .cards.card-container .card span {
-        font-weight: 700 !important;
-    }
-}
-
-/* up to iPhone 8 plus landscape mode */
-@media (max-width: 736px) and (orientation: landscape) {
-    .cards.card-container {
-        justify-content: space-evenly !important;
-        margin-bottom: 15px;
-    }
-
-    .cards.card-container .card {
-        width: 15vw !important;
-        margin-right: 10px;
-    }
-
-    .cards.cards.card-container .card h2 {
-        font-size: 1.5em !important;
-    }
-
-    .cards.cards.card-container .card span {
-        font-size: 1em;
-        font-weight: 500 !important;
-    }
-}
-
-/* iPhone 6 and up - cards h2 */
-@media (min-width: 414px) and (orientation: portrait) {
-    .cards.card-container .card h2 {
-        font-size: 1.8em !important;
-    }
-}
-
-/* up to iPhone5/5s/SE */
-@media (max-width: 414px) and (orientation: portrait) {
-    .cards.card-container {
-        justify-content: space-evenly !important;
-        margin-bottom: 15px;
-    }
-
-    .cards.card-container .card {
-        width: 35% !important;
-    }
-
-    .cards.card-container .card span {
-        font-weight: 700 !important;
-    }
-}
-
-/* all devices */
-@media (max-width: 768px) {
-    #map {
-        width: 100% !important;
-    }
-
-    .last-updated {
-        position: static !important;
-    }
-
-    .leaflet-right div.leaflet-control {
-        margin-right: 10px !important;
-    }
-
-    .leaflet-right .info h2,
-    .leaflet-right .info h3 {
-        font-size: 14px !important;
-    }
-
-    .leaflet-right .info p {
-        font-size: 12px !important;
-        margin-top: -5px !important;
-        margin-bottom: 5px !important;
-    }
-
-    .leaflet-right .info {
-        font-size: 8px;
-    }
-}
-
-/* all devices */
-@media (min-width: 767px) and (max-width: 1200px) {
-    .last-updated {
-        width: 100%;
-        display: contents;
-    }
-}
-
-/* all devices */
-@media (min-width: 767px) and (max-width: 1024px) {
-    .card-container .card {
-        width: 15vw !important;
-    }
-}
-
-/* iPad portrait */
-@media (device-width: 768px) and (orientation: portrait) {
-    .card-container .card {
-        width: 135px;
-    }
-}
-
-/* iPad and iPhone X landscape */
-@media (device-width: 812px) and (orientation: landscape), (device-width: 1024px) and (orientation: landscape) {
-    .last-updated {
-        width: 100%;
-        display: contents;
-    }
-}
-
-/* iPad landscape */
-@media (device-width: 1024px) and (orientation: landscape) {
-    .card-container .card {
-        width: 165px !important;
-    }
-}
-
-/* iPhone X landscape */
-@media (device-width: 812px) and (orientation: landscape) {
-    .card-container .card {
-        width: 15vw;
-    }
-}
-
-/* iPad Pro portrait */
-@media (device-width: 1024px) and (orientation: portrait) {
-    .card-container .card {
-        width: 165px !important;
-    }
-
-    .last-updated {
-        width: 100%;
-        display: contents;
-    }
-}
-
-/* Toastr */
-.toast-container {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
-        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+html.dark-theme .table-striped tbody tr:nth-of-type(odd) {
+    background-color: #666766 !important;
+    color: white;
 }

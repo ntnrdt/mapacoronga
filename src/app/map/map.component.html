@@ -1,44 +1,10 @@
-<link href="../../assets/css/leaflet.css">
-<script src="../../assets/scripts/leaflet.js"></script>
-
-<div class="container">
-
-    <div class="last-updated">
-        <h3>Última atualização</h3>
-        <p id="last-update-at"></p>
+<section class="map-section">
+    <div class="card">
+        <h5 class="card-header">
+            Mapa do Brasil
+        </h5>
+        <div class="card-body g-pa-0">
+            <div id="map" class="g-h-550"></div>
+        </div>
     </div>
-
-    <div class="cards card-container">
-        <a class="card g-ml-0" target="_blank" rel="noopener">
-            <h2 class="confirmed" id="total-confirmed-cases">0</h2>
-            <span>Confirmados</span>
-        </a>
-
-        <a class="card" target="_blank" rel="noopener">
-            <h2 class="recovered" id="total-confirmed-recovered">0</h2>
-            <span>Recuperados</span>
-        </a>
-
-        <a class="card" target="_blank" rel="noopener">
-            <h2 class="deaths" id="total-confirmed-deaths">0</h2>
-            <span>Óbitos</span>
-        </a>
-
-        <a class="card g-mr-0" target="_blank" rel="noopener">
-            <h2 class="deadly" id="total-confirmed-deadly">0%</h2>
-            <span>Letalidade</span>
-        </a>
-    </div>
-
-    <div id="map">
-    </div>
-    <div id="fonte">
-        <p>
-            <i><b>Fonte:</b>&nbsp;
-                <a href="https://covid.saude.gov.br/" target="_blank">Ministerio da Saude</a>
-                e
-                <a href="https://api.covid19api.com/" target="_blank">API Covid19</a>
-            </i>
-        </p>
-    </div>
-</div>
+</section>

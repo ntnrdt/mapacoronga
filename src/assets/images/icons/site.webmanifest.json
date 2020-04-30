@@ -48,8 +48,8 @@
             "type": "image/png"
         }
     ],
-    "theme_color": "#763030",
-    "background_color": "#763030",
+    "theme_color": "#ffffff",
+    "background_color": "#ffffff",
     "start_url": "https://cov19.com.br",
     "display": "standalone"
 }

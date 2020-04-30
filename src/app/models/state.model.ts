@@ -1,7 +1,7 @@
 export interface IStateModel {
-    name: string,
+    state: string,
     cases: number,
-    updatedAt: Date,
+    datetime: Date,
     deadly: string,
     deaths: number
 }
